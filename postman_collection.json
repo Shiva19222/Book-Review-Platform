@@ -1,0 +1,136 @@
+{
+  "info": {
+    "name": "MERN Book Review Platform",
+    "_postman_id": "d9f0f3a5-9a3b-4c5f-b001-demo",
+    "description": "Local API collection for MERN Book Review Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "token", "value": "" },
+    { "key": "bookId", "value": "" },
+    { "key": "reviewId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Demo\",\n  \"email\": \"demo@example.com\",\n  \"password\": \"Secret123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"demo@example.com\",\n  \"password\": \"Secret123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "List Books (page=1, sort=newest)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/books?page=1&sort=created_desc" }
+        },
+        {
+          "name": "Create Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/books",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Educated\",\n  \"author\": \"Tara Westover\",\n  \"description\": \"A powerful memoir.\",\n  \"genre\": \"Memoir\",\n  \"year\": 2018,\n  \"coverUrl\": \"https://m.media-amazon.com/images/I/81Y5WuARqpL.jpg\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Book by ID",
+          "request": { "method": "GET", "url": "{{baseUrl}}/books/{{bookId}}" }
+        },
+        {
+          "name": "Update Book",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/books/{{bookId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Educated (Updated)\",\n  \"author\": \"Tara Westover\",\n  \"description\": \"Updated.\",\n  \"genre\": \"Memoir\",\n  \"year\": 2018,\n  \"coverUrl\": \"https://m.media-amazon.com/images/I/81Y5WuARqpL.jpg\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Book",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/books/{{bookId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "List Reviews (Book)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/books/{{bookId}}/reviews" }
+        },
+        {
+          "name": "Add/Update My Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/books/{{bookId}}/reviews",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 5,\n  \"reviewText\": \"Excellent read!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Review by ID",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/reviews/{{reviewId}}"
+          }
+        }
+      ]
+    }
+  ]
+}
