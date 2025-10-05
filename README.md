@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Book-Review-Platform
-=======
 # MERN Book Review Platform
 
 Full-stack MERN application with JWT auth, book CRUD (with ownership), reviews (rating + text), pagination, average rating, and a React frontend with protected routes.
@@ -156,4 +153,25 @@ curl "http://localhost:5000/api/books?page=1&genre=Memoir&sort=rating_desc"
 ## License
 MIT
 
->>>>>>> 0f02593 (Initial commit: MERN Book Review Platform)
+
+## Submission Notes
+- Backend API (local): http://localhost:5000/api
+- Health check: http://localhost:5000/health
+- Frontend (local dev): http://localhost:5173/books
+- GitHub Repository: https://github.com/Shiva19222/Book-Review-Platform
+- Postman Collection: `postman_collection.json` at project root
+
+Quick start:
+```
+# backend
+cd backend
+copy .env.example .env
+# Set MONGODB_URI=mongodb://127.0.0.1:27017/bookreview?directConnection=true
+npm install
+npm run seed   # optional
+# frontend (new terminal)
+cd frontend
+copy .env.example .env
+# Ensure VITE_API_URL=http://localhost:5000/api (dev) or use Vite proxy (already configured)
+npm install
+npm run dev
